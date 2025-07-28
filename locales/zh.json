@@ -1,0 +1,72 @@
+{
+  "ui": {
+    "title": "基于角色的PDF分析系统",
+    "subtitle": "根据您的角色和目标定制的智能文档分析",
+    "persona_label": "您的角色/身份",
+    "persona_placeholder": "例如：人力资源专员、学生、数据分析师",
+    "job_label": "待完成的工作",
+    "job_placeholder": "例如：为员工入职创建可填写表单",
+    "upload_label": "上传PDF文件",
+    "upload_help": "选择一个或多个PDF文件进行分析（每个最大50MB）",
+    "analyze_button": "分析文档",
+    "processing": "正在处理您的文档...",
+    "results_title": "分析结果",
+    "example_personas": "示例角色",
+    "clear_button": "清除所有"
+  },
+  "personas": {
+    "hr_professional": "人力资源专员",
+    "student": "学生",
+    "data_analyst": "数据分析师",
+    "project_manager": "项目经理",
+    "researcher": "研究员",
+    "consultant": "商业顾问"
+  },
+  "jobs": {
+    "hr_professional": "为员工入职创建和管理可填写表单",
+    "student": "提取关键概念和学习材料以备考试准备",
+    "data_analyst": "识别趋势并提取可操作的商业洞察",
+    "project_manager": "跟踪项目里程碑和资源分配",
+    "researcher": "收集学术研究的证据和引用",
+    "consultant": "为客户演示开发战略建议"
+  },
+  "results": {
+    "metadata_title": "处理摘要",
+    "documents_processed": "已处理文档",
+    "sections_analyzed": "已分析章节",
+    "tables_found": "发现的表格",
+    "processing_time": "处理时间",
+    "extracted_sections": "排名最高的章节",
+    "subsection_analysis": "详细分析",
+    "importance_rank": "排名",
+    "relevance_score": "相关性评分",
+    "word_count": "字数",
+    "has_tables": "包含表格",
+    "actionable_insights": "可操作的洞察",
+    "table_integration": "表格数据"
+  },
+  "errors": {
+    "no_files": "请至少选择一个PDF文件进行分析。",
+    "no_persona": "请指定您的角色或身份。",
+    "no_job": "请描述您待完成的工作。",
+    "processing_failed": "分析失败，请重试。",
+    "file_too_large": "文件大小超过50MB的最大限制。",
+    "invalid_file": "请仅上传有效的PDF文件。"
+  },
+  "cli": {
+    "title": "基于角色的PDF分析系统",
+    "subtitle": "离线命令行模式",
+    "processing": "正在处理{count}个PDF文件...",
+    "persona_prompt": "角色",
+    "job_prompt": "待完成的工作",
+    "analysis_complete": "分析完成！",
+    "results_saved": "结果已保存到",
+    "no_pdfs_found": "未找到PDF文件！",
+    "configuration": "配置：",
+    "files_found": "文件：{count}个PDF",
+    "output_location": "输出：{path}",
+    "analysis_summary": "分析摘要",
+    "top_sections": "排名最高的章节",
+    "subsection_insights": "子章节洞察"
+  }
+}

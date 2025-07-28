@@ -1,0 +1,72 @@
+{
+  "ui": {
+    "title": "Sistema de Análisis de PDF Dirigido por Persona",
+    "subtitle": "Análisis inteligente de documentos adaptado a tu rol y objetivos",
+    "persona_label": "Tu Persona/Rol",
+    "persona_placeholder": "ej., Profesional de RRHH, Estudiante, Analista de Datos",
+    "job_label": "Trabajo por hacer",
+    "job_placeholder": "ej., Crear formularios rellenables para incorporación de empleados",
+    "upload_label": "Subir Archivos PDF",
+    "upload_help": "Selecciona uno o más archivos PDF para analizar (máx. 50MB cada uno)",
+    "analyze_button": "Analizar Documentos",
+    "processing": "Procesando tus documentos...",
+    "results_title": "Resultados del Análisis",
+    "example_personas": "Personas de Ejemplo",
+    "clear_button": "Limpiar Todo"
+  },
+  "personas": {
+    "hr_professional": "Profesional de RRHH",
+    "student": "Estudiante",
+    "data_analyst": "Analista de Datos", 
+    "project_manager": "Gerente de Proyecto",
+    "researcher": "Investigador",
+    "consultant": "Consultor de Negocios"
+  },
+  "jobs": {
+    "hr_professional": "Crear y gestionar formularios rellenables para incorporación de empleados",
+    "student": "Extraer conceptos clave y materiales de estudio para preparación de exámenes",
+    "data_analyst": "Identificar tendencias y extraer insights empresariales accionables",
+    "project_manager": "Rastrear hitos del proyecto y asignación de recursos",
+    "researcher": "Recopilar evidencia y citas para investigación académica",
+    "consultant": "Desarrollar recomendaciones estratégicas para presentaciones a clientes"
+  },
+  "results": {
+    "metadata_title": "Resumen de Procesamiento",
+    "documents_processed": "Documentos Procesados",
+    "sections_analyzed": "Secciones Analizadas",
+    "tables_found": "Tablas Encontradas", 
+    "processing_time": "Tiempo de Procesamiento",
+    "extracted_sections": "Secciones Mejor Clasificadas",
+    "subsection_analysis": "Análisis Detallado",
+    "importance_rank": "Rango",
+    "relevance_score": "Puntuación de Relevancia",
+    "word_count": "Palabras",
+    "has_tables": "Contiene Tablas",
+    "actionable_insights": "Insights Accionables",
+    "table_integration": "Datos de Tabla"
+  },
+  "errors": {
+    "no_files": "Por favor selecciona al menos un archivo PDF para analizar.",
+    "no_persona": "Por favor especifica tu persona o rol.", 
+    "no_job": "Por favor describe tu trabajo por hacer.",
+    "processing_failed": "El análisis falló. Por favor intenta de nuevo.",
+    "file_too_large": "El tamaño del archivo excede el límite máximo de 50MB.",
+    "invalid_file": "Por favor sube solo archivos PDF válidos."
+  },
+  "cli": {
+    "title": "Sistema de Análisis de PDF Dirigido por Persona",
+    "subtitle": "Modo CLI Sin Conexión",
+    "processing": "Procesando {count} archivos PDF...",
+    "persona_prompt": "Persona",
+    "job_prompt": "Trabajo por hacer",
+    "analysis_complete": "¡Análisis completo!",
+    "results_saved": "Resultados guardados en",
+    "no_pdfs_found": "¡No se encontraron archivos PDF!",
+    "configuration": "Configuración:",
+    "files_found": "Archivos: {count} PDFs",
+    "output_location": "Salida: {path}",
+    "analysis_summary": "RESUMEN DEL ANÁLISIS",
+    "top_sections": "SECCIONES MEJOR CLASIFICADAS",
+    "subsection_insights": "INSIGHTS DE SUBSECCIONES"
+  }
+}

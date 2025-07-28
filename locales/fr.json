@@ -1,0 +1,72 @@
+{
+  "ui": {
+    "title": "Système d'Analyse PDF Dirigé par Persona",
+    "subtitle": "Analyse intelligente de documents adaptée à votre rôle et objectifs",
+    "persona_label": "Votre Persona/Rôle",
+    "persona_placeholder": "ex., Professionnel RH, Étudiant, Analyste de Données",
+    "job_label": "Travail à accomplir",
+    "job_placeholder": "ex., Créer des formulaires remplissables pour l'intégration des employés",
+    "upload_label": "Télécharger des Fichiers PDF",
+    "upload_help": "Sélectionnez un ou plusieurs fichiers PDF à analyser (max 50MB chacun)",
+    "analyze_button": "Analyser les Documents",
+    "processing": "Traitement de vos documents...",
+    "results_title": "Résultats de l'Analyse",
+    "example_personas": "Exemples de Personas",
+    "clear_button": "Tout Effacer"
+  },
+  "personas": {
+    "hr_professional": "Professionnel RH",
+    "student": "Étudiant",
+    "data_analyst": "Analyste de Données",
+    "project_manager": "Chef de Projet", 
+    "researcher": "Chercheur",
+    "consultant": "Consultant en Affaires"
+  },
+  "jobs": {
+    "hr_professional": "Créer et gérer des formulaires remplissables pour l'intégration des employés",
+    "student": "Extraire des concepts clés et du matériel d'étude pour la préparation aux examens",
+    "data_analyst": "Identifier les tendances et extraire des insights commerciaux exploitables",
+    "project_manager": "Suivre les jalons du projet et l'allocation des ressources",
+    "researcher": "Rassembler des preuves et des citations pour la recherche académique",
+    "consultant": "Développer des recommandations stratégiques pour les présentations clients"
+  },
+  "results": {
+    "metadata_title": "Résumé du Traitement",
+    "documents_processed": "Documents Traités",
+    "sections_analyzed": "Sections Analysées",
+    "tables_found": "Tableaux Trouvés",
+    "processing_time": "Temps de Traitement", 
+    "extracted_sections": "Sections les Mieux Classées",
+    "subsection_analysis": "Analyse Détaillée",
+    "importance_rank": "Rang",
+    "relevance_score": "Score de Pertinence",
+    "word_count": "Mots",
+    "has_tables": "Contient des Tableaux",
+    "actionable_insights": "Insights Exploitables",
+    "table_integration": "Données de Tableau"
+  },
+  "errors": {
+    "no_files": "Veuillez sélectionner au moins un fichier PDF à analyser.",
+    "no_persona": "Veuillez spécifier votre persona ou rôle.",
+    "no_job": "Veuillez décrire votre travail à accomplir.",
+    "processing_failed": "L'analyse a échoué. Veuillez réessayer.",
+    "file_too_large": "La taille du fichier dépasse la limite maximale de 50MB.",
+    "invalid_file": "Veuillez télécharger uniquement des fichiers PDF valides."
+  },
+  "cli": {
+    "title": "Système d'Analyse PDF Dirigé par Persona",
+    "subtitle": "Mode CLI Hors Ligne",
+    "processing": "Traitement de {count} fichiers PDF...",
+    "persona_prompt": "Persona",
+    "job_prompt": "Travail à accomplir",
+    "analysis_complete": "Analyse terminée !",
+    "results_saved": "Résultats sauvegardés dans",
+    "no_pdfs_found": "Aucun fichier PDF trouvé !",
+    "configuration": "Configuration :",
+    "files_found": "Fichiers : {count} PDFs",
+    "output_location": "Sortie : {path}",
+    "analysis_summary": "RÉSUMÉ DE L'ANALYSE",
+    "top_sections": "SECTIONS LES MIEUX CLASSÉES",
+    "subsection_insights": "INSIGHTS DES SOUS-SECTIONS"
+  }
+}

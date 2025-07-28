@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis Results - Persona-Driven PDF Analysis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container-fluid">
+        <!-- Header -->
+        <div class="row bg-primary text-white py-3 mb-4">
+            <div class="col">
+                <h1 class="h3 mb-0">
+                    <i class="fas fa-chart-line me-2"></i>
+                    Analysis Results
+                </h1>
+                <div class="d-flex justify-content-between align-items-center">
+                    <p class="mb-0 text-light">Persona-driven content analysis and ranking</p>
+                    <a href="/" class="btn btn-light btn-sm">
+                        <i class="fas fa-plus me-1"></i>
+                        New Analysis
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Results Content -->
+        <div id="resultsContent">
+            <!-- Content will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Template for displaying results
+        function displayResults(data) {
+            const container = document.getElementById('resultsContent');
+            
+            // Metadata Section
+            const metadata = data.metadata;
+            let html = `
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header bg-light">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-info-circle me-2"></i>
+                                    Analysis Summary
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h6>Persona Context</h6>
+                                        <p><strong>Persona:</strong> ${metadata.persona}</p>
+                                        <p><strong>Job-to-be-done:</strong> ${metadata.job_to_be_done}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h6>Processing Summary</h6>
+                                        <p><strong>Documents:</strong> ${metadata.processing_summary.total_documents}</p>
+                                        <p><strong>Sections:</strong> ${metadata.processing_summary.total_sections_analyzed}</p>
+                                        <p><strong>Tables:</strong> ${metadata.processing_summary.total_tables_found}</p>
+                                        ${data.processing_time ? `<p><strong>Processing Time:</strong> ${data.processing_time}s</p>` : ''}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Extracted Sections
+            html += `
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header bg-light d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-list-ol me-2"></i>
+                                    Ranked Sections (Top ${Math.min(10, data.extracted_sections.length)})
+                                </h5>
+                                <button class="btn btn-sm btn-outline-primary" onclick="downloadResults()">
+                                    <i class="fas fa-download me-1"></i>
+                                    Download JSON
+                                </button>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Rank</th>
+                                                <th>Document</th>
+                                                <th>Page</th>
+                                                <th>Persona-Adapted Title</th>
+                                                <th>Score</th>
+                                                <th>Details</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+            `;
+
+            // Top 10 sections
+            data.extracted_sections.slice(0, 10).forEach(section => {
+                const scoreColor = section.relevance_scores.total_score > 0.7 ? 'success' : 
+                                 section.relevance_scores.total_score > 0.4 ? 'warning' : 'secondary';
+                
+                html += `
+                    <tr>
+                        <td>
+                            <span class="badge bg-primary">#${section.importance_rank}</span>
+                        </td>
+                        <td>
+                            <small class="text-muted">${section.document}</small>
+                        </td>
+                        <td>
+                            <span class="badge bg-light text-dark">${section.page_number}</span>
+                        </td>
+                        <td>
+                            <strong>${section.persona_adapted_title}</strong>
+                            ${section.original_section_title !== section.persona_adapted_title ? 
+                              `<br><small class="text-muted">Original: ${section.original_section_title}</small>` : ''}
+                        </td>
+                        <td>
+                            <span class="badge bg-${scoreColor}">${(section.relevance_scores.total_score * 100).toFixed(1)}%</span>
+                        </td>
+                        <td>
+                            <button class="btn btn-sm btn-outline-info" onclick="showSectionDetails(${section.importance_rank - 1})">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Subsection Analysis
+            html += `
+                <div class="row mb-4">
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header bg-light">
+                                <h5 class="card-title mb-0">
+                                    <i class="fas fa-microscope me-2"></i>
+                                    Detailed Subsection Analysis
+                                </h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="accordion" id="subsectionAccordion">
+            `;
+
+            // Top subsections
+            data.subsection_analysis.slice(0, 5).forEach((subsection, index) => {
+                html += `
+                    <div class="accordion-item">
+                        <h2 class="accordion-header" id="heading${index}">
+                            <button class="accordion-button ${index === 0 ? '' : 'collapsed'}" 
+                                    type="button" data-bs-toggle="collapse" 
+                                    data-bs-target="#collapse${index}">
+                                <div class="d-flex w-100 justify-content-between align-items-center me-3">
+                                    <span>
+                                        <strong>${subsection.persona_adapted_title}</strong>
+                                        <small class="text-muted ms-2">(${subsection.document} - Page ${subsection.page_number})</small>
+                                    </span>
+                                    <span class="badge bg-primary">Rank #${subsection.importance_rank}</span>
+                                </div>
+                            </button>
+                        </h2>
+                        <div id="collapse${index}" class="accordion-collapse collapse ${index === 0 ? 'show' : ''}" 
+                             data-bs-parent="#subsectionAccordion">
+                            <div class="accordion-body">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <h6>Refined Summary</h6>
+                                        <p>${subsection.refined_text}</p>
+                                        
+                                        <h6>Actionable Insights</h6>
+                                        <ul class="list-unstyled">
+                `;
+
+                subsection.actionable_insights.forEach(insight => {
+                    html += `<li><i class="fas fa-lightbulb text-warning me-2"></i>${insight}</li>`;
+                });
+
+                html += `
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="bg-light p-3 rounded">
+                                            <h6>Section Info</h6>
+                                            <p><small><strong>Document:</strong> ${subsection.document}</small></p>
+                                            <p><small><strong>Page:</strong> ${subsection.page_number}</small></p>
+                                            <p><small><strong>Original Title:</strong> ${subsection.section_title}</small></p>
+                `;
+
+                if (subsection.table_integration) {
+                    html += `
+                                            <h6 class="mt-3">Table Data</h6>
+                                            <p><small>${subsection.table_integration.table_count} table(s) with ${subsection.table_integration.total_rows} rows</small></p>
+                    `;
+                }
+
+                html += `
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            html += `
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        function showSectionDetails(index) {
+            // This would show detailed section information in a modal
+            alert('Section details functionality would be implemented here');
+        }
+
+        function downloadResults() {
+            // This would trigger a download of the JSON results
+            alert('Download functionality would be implemented here');
+        }
+
+        // Check if there's result data passed to this page
+        if (window.resultData) {
+            displayResults(window.resultData);
+        }
+    </script>
+</body>
+</html>

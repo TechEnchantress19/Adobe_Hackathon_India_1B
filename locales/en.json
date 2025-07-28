@@ -1,0 +1,72 @@
+{
+  "ui": {
+    "title": "Persona-Driven PDF Analysis System",
+    "subtitle": "Intelligent document analysis tailored to your role and objectives",
+    "persona_label": "Your Persona/Role",
+    "persona_placeholder": "e.g., HR Professional, Student, Data Analyst",
+    "job_label": "Job-to-be-done",
+    "job_placeholder": "e.g., Create fillable forms for employee onboarding",
+    "upload_label": "Upload PDF Files",
+    "upload_help": "Select one or more PDF files to analyze (max 50MB each)",
+    "analyze_button": "Analyze Documents",
+    "processing": "Processing your documents...",
+    "results_title": "Analysis Results",
+    "example_personas": "Example Personas",
+    "clear_button": "Clear All"
+  },
+  "personas": {
+    "hr_professional": "HR Professional",
+    "student": "Student", 
+    "data_analyst": "Data Analyst",
+    "project_manager": "Project Manager",
+    "researcher": "Researcher",
+    "consultant": "Business Consultant"
+  },
+  "jobs": {
+    "hr_professional": "Create and manage fillable forms for employee onboarding",
+    "student": "Extract key concepts and study materials for exam preparation",
+    "data_analyst": "Identify trends and extract actionable business insights",
+    "project_manager": "Track project milestones and resource allocation",
+    "researcher": "Gather evidence and citations for academic research",
+    "consultant": "Develop strategic recommendations for client presentations"
+  },
+  "results": {
+    "metadata_title": "Processing Summary",
+    "documents_processed": "Documents Processed",
+    "sections_analyzed": "Sections Analyzed", 
+    "tables_found": "Tables Found",
+    "processing_time": "Processing Time",
+    "extracted_sections": "Top Ranked Sections",
+    "subsection_analysis": "Detailed Analysis",
+    "importance_rank": "Rank",
+    "relevance_score": "Relevance Score",
+    "word_count": "Words",
+    "has_tables": "Contains Tables",
+    "actionable_insights": "Actionable Insights",
+    "table_integration": "Table Data"
+  },
+  "errors": {
+    "no_files": "Please select at least one PDF file to analyze.",
+    "no_persona": "Please specify your persona or role.",
+    "no_job": "Please describe your job-to-be-done.",
+    "processing_failed": "Analysis failed. Please try again.",
+    "file_too_large": "File size exceeds the maximum limit of 50MB.",
+    "invalid_file": "Please upload valid PDF files only."
+  },
+  "cli": {
+    "title": "Persona-Driven PDF Analysis System",
+    "subtitle": "Offline CLI Mode",
+    "processing": "Processing {count} PDF files...",
+    "persona_prompt": "Persona",
+    "job_prompt": "Job-to-be-done", 
+    "analysis_complete": "Analysis complete!",
+    "results_saved": "Results saved to",
+    "no_pdfs_found": "No PDF files found!",
+    "configuration": "Configuration:",
+    "files_found": "Files: {count} PDFs",
+    "output_location": "Output: {path}",
+    "analysis_summary": "ANALYSIS SUMMARY",
+    "top_sections": "TOP RANKED SECTIONS",
+    "subsection_insights": "SUBSECTION INSIGHTS"
+  }
+}

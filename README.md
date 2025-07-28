@@ -2,9 +2,7 @@
 **Persona-Driven PDF Analysis & Semantic Linking System**
 ---
 ## Core Approach & Processing Workflow
-```
 This project is a **Persona-Driven PDF Analysis and Semantic Linking System**. Its primary goal is to address **information fragmentation** by creating meaningful, cross-document relationships and generating **context-aware insights** tailored to a user's specific persona and job-to-be-done.
-```
 ---
 
 ### Core Concept

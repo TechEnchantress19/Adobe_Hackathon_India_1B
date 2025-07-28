@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  pdf-analysis:
+    build: .
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./uploads:/app/uploads
+      - ./sample_pdfs:/app/sample_pdfs
+    environment:
+      - PYTHONPATH=/app
+      - FLASK_ENV=production
+    command: ["python", "main.py", "--web", "--port", "5000"]
+    
+  pdf-analysis-cli:
+    build: .
+    volumes:
+      - ./uploads:/app/uploads
+      - ./sample_pdfs:/app/sample_pdfs
+      - ./output:/app/output
+    environment:
+      - PYTHONPATH=/app
+    command: ["python", "main.py", "--cli", "--input", "/app/sample_pdfs", "--output", "/app/output", "--persona", "Data Analyst", "--job", "Extract key metrics and insights"]
+    profiles:
+      - cli

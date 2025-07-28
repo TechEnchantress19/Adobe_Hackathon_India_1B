@@ -1,0 +1,43 @@
+modules = ["python-3.11"]
+
+[nix]
+channel = "stable-25_05"
+packages = ["freetype", "glibcLocales", "gmp", "gumbo", "harfbuzz", "jbig2dec", "lcms2", "libimagequant", "libjpeg", "libjpeg_turbo", "libtiff", "libwebp", "libxcrypt", "mupdf", "openjpeg", "swig", "tcl", "tk", "xcbuild", "zlib"]
+
+[workflows]
+runButton = "Project"
+
+[[workflows.workflow]]
+name = "Project"
+mode = "parallel"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "PDF Analysis Server"
+
+[[workflows.workflow.tasks]]
+task = "workflow.run"
+args = "PDF Analysis Demo"
+
+[[workflows.workflow]]
+name = "PDF Analysis Server"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "pip install -r requirements.txt 2>/dev/null || pip install PyMuPDF pdfplumber camelot-py sentence-transformers flask pandas numpy scikit-learn && python main.py --web --port 5000"
+waitForPort = 5000
+
+[[workflows.workflow]]
+name = "PDF Analysis Demo"
+author = "agent"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "python demo_app.py"
+waitForPort = 5000
+
+[[ports]]
+localPort = 5000
+externalPort = 80

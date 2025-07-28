@@ -1,9 +1,97 @@
 # Adobe India Hackathon Problem Statement - 1B  
 **Persona-Driven PDF Analysis & Semantic Linking System**
+---
+## Core Approach & Processing Workflow
+```
+This project is a **Persona-Driven PDF Analysis and Semantic Linking System**. Its primary goal is to address **information fragmentation** by creating meaningful, cross-document relationships and generating **context-aware insights** tailored to a user's specific persona and job-to-be-done.
+```
+---
+
+### Core Concept
+
+The system is built on two foundational pillars:
+
+#### 1. Semantic Linking Across Documents
+- Goes beyond analyzing PDFs in isolation.  
+- Understands **semantic meaning** of content to identify and link related headings/topics across multiple PDFs.  
+- Creates a **unified knowledge graph** of scattered information, enabling fast cross-referencing.
+
+#### 2. Persona-Driven Context
+- Customizes analysis based on:
+  - **Persona** (e.g., "HR Professional", "Student")  
+  - **Job-to-be-done** (e.g., "Create fillable onboarding forms")  
+
+This context is used to:
+- **Rank Content**: Multi-factor scoring algorithm evaluates sections via:
+  - Semantic similarity  
+  - Keyword matching  
+  - Relevance heuristics  
+- **Adapt Content**: Generates **persona-adaptive headings and summaries**, reframing content to fit the user’s perspective.
+
+By combining these concepts, the system transforms static PDFs into an **intelligent, interconnected knowledge base**, allowing users to quickly find actionable insights without manual searching.
 
 ---
 
-## 1. Motivation
+### Project Execution Workflow
+
+The process is orchestrated by `main.py`, which coordinates the modular pipeline from **input discovery to output generation**.
+
+---
+
+#### 1. File Discovery and Input
+- Controlled by `cli_mode` function in `main.py`  
+- Logic:
+  - Check command-line arguments `--files` or `--input`  
+  - If absent, recursively scan default directories (`./input`) for `.pdf` files  
+  - Aggregate all discovered paths for processing
+
+---
+
+#### 2. User Context Acquisition
+- If persona or job are **not provided via CLI**, prompts user interactively  
+- Captured **persona + job** defines the **analysis lens**
+
+---
+
+#### 3. Core Processing Pipeline
+
+##### **a) Content Extraction**
+- Handled by `PDFProcessor` (`core/pdf_processor.py`)  
+- Uses **PyMuPDF** and **pdfplumber** for:
+  - Text extraction  
+  - Heading hierarchy  
+  - Tables and structural metadata  
+
+##### **b) Persona Analysis**
+- Managed by `PersonaAnalyzer` (`core/persona_analyzer.py`)  
+- Uses **SentenceTransformer** to:
+  - Generate semantic embeddings  
+  - Extract persona-related keywords  
+  - Build **context vector** for scoring relevance  
+
+##### **c) Content Ranking**
+- Orchestrated by `RankingEngine` (`core/ranking_engine.py`)  
+- Multi-factor scoring:
+  - Semantic similarity
+  - Keyword overlap
+  - Context alignment
+- Produces **ranked sections** prioritized for persona needs
+
+##### **d) Output Generation**
+- Handled by `OutputGenerator` (`core/output_generator.py`)  
+- Creates structured **JSON output** with:
+  - Persona-adaptive titles
+  - Actionable insights
+  - Relevance scores  
+
+---
+
+#### 4. Saving the Results
+- Results stored in `./output` (default)  
+- Timestamped JSON file containing full analysis for traceability
+
+---
+## Motivation
 
 Problem Statement 1B extends the challenge of **heading extraction (1A)** to **semantic linking**:
 - Connect extracted headings **across multiple PDFs**  
@@ -15,7 +103,7 @@ Most enterprise document systems struggle with **fragmentation** — users waste
 
 ---
 
-## 2. Alignment with Problem Statement 1B
+## Alignment with Problem Statement 1B
 
 **Hackathon Objective:**  
 > “Create a persona-driven system that links related headings across multiple documents for improved contextual understanding and insight generation.”
@@ -28,7 +116,7 @@ Our solution addresses this by:
 
 ---
 
-## 3. Core Tech Used
+## Core Tech Used
 
 - **Heading Extraction (1A):** `PyMuPDF`, `pdfplumber`
 - **Semantic Embeddings:** `sentence-transformers` (≤200MB model)
@@ -38,7 +126,7 @@ Our solution addresses this by:
 
 ---
 
-## 4. Deliverables
+## Deliverables
 
 - **CLI Tool (`cli_offline.py`)**  
   - Unified for both **extraction** and **semantic linking**
@@ -51,7 +139,7 @@ Our solution addresses this by:
 
 ---
 
-## 5. Key Differentiators
+## Key Differentiators
 
 1. **End-to-End Pipeline**: Combines heading extraction + cross-document linking  
 2. **Persona-Aware Insights**: Summaries are contextually rewritten per persona  
@@ -61,7 +149,7 @@ Our solution addresses this by:
 
 ---
 
-## 6. Results
+## Results
 
 - **Cross-Document Linkage**: Identifies related sections with >85% accuracy  
 - **Persona Adaptation**: HR, Analyst, Student modes validated with test PDFs  
